@@ -1,6 +1,6 @@
 <a href="https://codebeat.co/projects/github-com-heitorcolangelo-kappuccino-develop"><img alt="codebeat badge" src="https://codebeat.co/badges/56bd966e-a50b-4f9c-a3d5-f7fdb9f0afca" /></a>
 <a href="https://www.bitrise.io/app/e3a8637b620dcfff/status.svg?token=Z0f8z81pqA5QUo7QEtGvzw"><img alt="bitrise badge" src="https://www.bitrise.io/app/e3a8637b620dcfff/status.svg?token=Z0f8z81pqA5QUo7QEtGvzw" /></a>
-[ ![Download](https://api.bintray.com/packages/heitorcolangelo/kappuccino/kappuccino/images/download.svg) ](https://bintray.com/heitorcolangelo/kappuccino/kappuccino/_latestVersion)
+[ ![Download](https://api.bintray.com/packages/concrete/concrete-maven/kappuccino/images/download.svg) ](https://bintray.com/concrete/concrete-maven/kappuccino/_latestVersion)
 # kappuccino
 A framework to simplify the way you do instrumentation tests in your app, using <a href="https://google.github.io/android-testing-support-library/docs/espresso/">Espresso</a> and <a href="https://kotlinlang.org/">Kotlin</a>.
 
@@ -261,6 +261,56 @@ To type text in a RecyclerView item's EditText:
 }
 ```
 
+To swipe a RecyclerView's item left or right:
+
+``` kotlin
+@Test fun recyclerView_swipeLeft_example() {
+    recyclerView(R.id.recycler_view() {
+        atPosition(0) {
+            swipeLeft()
+        }
+
+        atPosition(1) {
+            swipeRight()
+        }
+    }
+}
+```
+
+### Menu and action bar
+To interact with the options menu:
+
+``` kotlin
+@Test
+fun whenClickingOnItem1_shouldShowCorrectText() {
+    menu {
+        onItem(R.string.item_1) {
+            click()
+        }
+    }
+
+    displayed {
+        text(R.string.item_1_selected)
+    }
+}
+```
+
+To interact with the action bar:
+
+``` kotlin
+@Test
+fun whenClickingOnActionBarItem_shouldClearText() {
+    menu(openOptionsMenu = false) {
+        onActionBarItem(R.id.item_clear) {
+            click()
+        }
+    }
+
+    notDisplayed {
+        id(R.id.txt_menu)
+    }
+```
+
 ### Matchers
 You can use the following matchers:
 ``` kotlin
@@ -339,7 +389,7 @@ fun grantContactsPermission() {
     }
 
     runtimePermission(Manifest.permission.READ_CONTACTS) {
-        grant()
+        allow()
     }
 
     displayed {
