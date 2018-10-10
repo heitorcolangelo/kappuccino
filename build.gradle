@@ -25,7 +25,7 @@ allprojects {
 ext {
     // SDK
     compileSdk = 28
-    minSdk = 17
+    minSdk = 19
     targetSdk = 28
 
     // Sample code third part libraries

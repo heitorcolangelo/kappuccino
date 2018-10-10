@@ -43,6 +43,7 @@ dependencies {
 
     testImplementation "junit:junit:$versions.jUnit"
     androidTestImplementation project(':kappuccino')
+    androidTestImplementation project(':kappuccino-core')
     androidTestImplementation "com.android.support.test.espresso:espresso-intents:$versions.espresso"
     androidTestImplementation "com.android.support.test.espresso:espresso-core:$versions.espresso"
     androidTestImplementation "com.android.support.test.espresso:espresso-contrib:$versions.espresso"
