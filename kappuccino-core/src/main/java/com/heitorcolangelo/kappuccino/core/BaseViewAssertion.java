@@ -29,31 +29,37 @@ public abstract class BaseViewAssertion<T> implements ViewMatcherMethods<T> {
 
     @Override
     public @NonNull T text(String text) {
+        check(viewMatcherMethod.text(text));
         return getInstance();
     }
 
     @Override
     public @NonNull T text(Matcher<String> textMatcher) {
+        check(viewMatcherMethod.text(textMatcher));
         return getInstance();
     }
 
     @Override
     public @NonNull T contentDescription(int contentDescriptionId) {
+        check(viewMatcherMethod.contentDescription(contentDescriptionId));
         return getInstance();
     }
 
     @Override
     public @NonNull T contentDescription(String contentDescription) {
+        check(viewMatcherMethod.contentDescription(contentDescription));
         return getInstance();
     }
 
     @Override
     public @NonNull T contentDescription(Matcher<CharSequence> contentDescriptionMatcher) {
+        check(viewMatcherMethod.contentDescription(contentDescriptionMatcher));
         return getInstance();
     }
 
     @Override
     public @NonNull T custom(Matcher<View> viewMatcher) {
+        check(viewMatcher);
         return getInstance();
     }
 
