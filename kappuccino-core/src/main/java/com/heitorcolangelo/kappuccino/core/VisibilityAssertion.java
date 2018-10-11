@@ -10,6 +10,7 @@ import javax.annotation.ParametersAreNonnullByDefault;
 
 import static android.support.test.espresso.matcher.ViewMatchers.isDisplayed;
 
+@SuppressWarnings("WeakerAccess")
 @ParametersAreNonnullByDefault
 public class VisibilityAssertion extends BaseAssertionProvider {
 
@@ -22,18 +23,24 @@ public class VisibilityAssertion extends BaseAssertionProvider {
     }
 
     public static Displayed displayed() {
-        return new Displayed();
+        return new Displayed(new VisibilityAssertion());
     }
 
     public static NotDisplayed notDisplayed() {
-        return new NotDisplayed();
+        return new NotDisplayed(new VisibilityAssertion());
     }
 
     public static class Displayed extends BaseViewAssertion<Displayed> {
 
+        private final VisibilityAssertion visibilityAssertion;
+
+        Displayed(VisibilityAssertion visibilityAssertion) {
+            this.visibilityAssertion = visibilityAssertion;
+        }
+
         @Override
         @NonNull ViewAssertion getViewAssertion() {
-            return new VisibilityAssertion().getViewAssertion(true);
+            return visibilityAssertion.getViewAssertion(true);
         }
 
         @Override
@@ -45,9 +52,15 @@ public class VisibilityAssertion extends BaseAssertionProvider {
 
     public static class NotDisplayed extends BaseViewAssertion<NotDisplayed> {
 
+        private final VisibilityAssertion assertion;
+
+        NotDisplayed(VisibilityAssertion assertion) {
+            this.assertion = assertion;
+        }
+
         @Override
         @NonNull ViewAssertion getViewAssertion() {
-            return new VisibilityAssertion().getViewAssertion(false);
+            return assertion.getViewAssertion(false);
         }
 
         @Override

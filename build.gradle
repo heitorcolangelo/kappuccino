@@ -1,5 +1,5 @@
 buildscript {
-    ext.kotlin = '1.2.70'
+    ext.kotlin = '1.2.71'
     repositories {
         jcenter()
         mavenCentral()
@@ -7,9 +7,9 @@ buildscript {
     }
     dependencies {
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin"
-        classpath 'com.android.tools.build:gradle:3.1.4'
-        classpath 'com.github.dcendents:android-maven-gradle-plugin:2.0'
-        classpath 'com.jfrog.bintray.gradle:gradle-bintray-plugin:1.7.2'
+        classpath 'com.android.tools.build:gradle:3.2.0'
+        classpath 'com.github.dcendents:android-maven-gradle-plugin:2.1'
+        classpath 'com.jfrog.bintray.gradle:gradle-bintray-plugin:1.8.4'
     }
 }
 
@@ -36,6 +36,7 @@ ext {
     // Tests third part libraries
     espresso = "3.0.2"
     jUnit = "4.12"
+    mockito = "2.23.0"
     rules = "1.0.2"
     runner = "1.0.2"
     uiAutomator = "2.1.3"

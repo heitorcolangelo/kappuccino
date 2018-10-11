@@ -1,6 +1,7 @@
 package com.heitorcolangelo.kappuccino.core;
 
 import android.support.annotation.NonNull;
+import android.support.annotation.VisibleForTesting;
 import android.support.test.espresso.ViewAssertion;
 import android.view.View;
 
@@ -8,10 +9,11 @@ import org.hamcrest.Matcher;
 
 import javax.annotation.ParametersAreNonnullByDefault;
 
+@SuppressWarnings("WeakerAccess")
 @ParametersAreNonnullByDefault
 public abstract class BaseViewAssertion<T> implements ViewMatcherMethods<T> {
 
-    private ViewMatcherMethod viewMatcherMethod = new ViewMatcherMethod();
+    ViewMatcherMethod viewMatcherMethod = new ViewMatcherMethod();
 
     @Override
     public @NonNull T id(int viewId) {
@@ -59,7 +61,8 @@ public abstract class BaseViewAssertion<T> implements ViewMatcherMethods<T> {
 
     abstract @NonNull T getInstance();
 
-    private void check(Matcher<View> viewMatcher) {
+    @VisibleForTesting
+    void check(Matcher<View> viewMatcher) {
         new ViewInteractionProcessor(viewMatcher).check(getViewAssertion());
     }
 
