@@ -39,12 +39,12 @@ public class VisibilityAssertion extends BaseAssertionProvider {
         }
 
         @Override
-        @NonNull ViewAssertion getViewAssertion() {
+        @NonNull protected ViewAssertion getViewAssertion() {
             return visibilityAssertion.getViewAssertion(true);
         }
 
         @Override
-        @NonNull Displayed getInstance() {
+        @NonNull protected Displayed getInstance() {
             return this;
         }
 
@@ -59,12 +59,12 @@ public class VisibilityAssertion extends BaseAssertionProvider {
         }
 
         @Override
-        @NonNull ViewAssertion getViewAssertion() {
+        @NonNull protected ViewAssertion getViewAssertion() {
             return assertion.getViewAssertion(false);
         }
 
         @Override
-        @NonNull NotDisplayed getInstance() {
+        @NonNull protected NotDisplayed getInstance() {
             return this;
         }
 

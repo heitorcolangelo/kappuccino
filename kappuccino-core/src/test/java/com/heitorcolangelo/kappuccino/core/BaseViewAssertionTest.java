@@ -107,15 +107,15 @@ public class BaseViewAssertionTest {
 
     @ParametersAreNonnullByDefault
     private class TestViewAssertion extends BaseViewAssertion<TestViewAssertion> {
-        @NonNull @Override ViewAssertion getViewAssertion() {
+        @NonNull @Override protected ViewAssertion getViewAssertion() {
             return matches(isDisplayed());
         }
 
-        @NonNull @Override TestViewAssertion getInstance() {
+        @NonNull @Override protected TestViewAssertion getInstance() {
             return this;
         }
 
-        @Override void check(Matcher<View> viewMatcher) {
+        @Override protected void check(Matcher<View> viewMatcher) {
         }
     }
 
