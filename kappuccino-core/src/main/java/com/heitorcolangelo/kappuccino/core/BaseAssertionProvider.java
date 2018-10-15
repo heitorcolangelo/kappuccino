@@ -9,7 +9,7 @@ import org.hamcrest.Matcher;
 import static android.support.test.espresso.assertion.ViewAssertions.matches;
 import static org.hamcrest.Matchers.not;
 
-abstract class BaseAssertionProvider {
+public abstract class BaseAssertionProvider {
 
     @NonNull ViewAssertion getViewAssertion(boolean assertionValue) {
         if (assertionValue) {
@@ -19,6 +19,6 @@ abstract class BaseAssertionProvider {
         }
     }
 
-    abstract @NonNull Matcher<View> getViewMatcher();
+    public abstract @NonNull Matcher<View> getViewMatcher();
 
 }

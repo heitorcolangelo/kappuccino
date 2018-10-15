@@ -75,4 +75,10 @@ public interface ViewMatcherMethods<T> {
     @NonNull
     T custom(Matcher<View> viewMatcher);
 
+    /**
+     * Match a view based on the combination of all matchers passed as parameter
+     */
+    @NonNull
+    T allOf(AllOfViewMatcher viewMatchers);
+
 }

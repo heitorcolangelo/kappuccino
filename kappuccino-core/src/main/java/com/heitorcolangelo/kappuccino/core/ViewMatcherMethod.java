@@ -6,6 +6,7 @@ import android.support.annotation.StringRes;
 import android.view.View;
 
 import org.hamcrest.Matcher;
+import org.hamcrest.Matchers;
 
 import javax.annotation.ParametersAreNonnullByDefault;
 
@@ -54,6 +55,11 @@ public class ViewMatcherMethod implements ViewMatcherMethods<Matcher<View>> {
     @Override
     public @NonNull Matcher<View> custom(Matcher<View> viewMatcher) {
         return viewMatcher;
+    }
+
+    @Override
+    public @NonNull Matcher<View> allOf(AllOfViewMatcher viewMatchers) {
+        return Matchers.allOf(viewMatchers.getViewMatchers());
     }
 
 }

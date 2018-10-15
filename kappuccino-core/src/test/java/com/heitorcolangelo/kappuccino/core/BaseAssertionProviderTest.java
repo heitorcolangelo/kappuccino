@@ -20,7 +20,7 @@ public class BaseAssertionProviderTest {
         final Matcher<View> viewMatcher = isDisplayed();
 
         BaseAssertionProvider assertionProvider = new BaseAssertionProvider() {
-            @NonNull @Override Matcher<View> getViewMatcher() {
+            @NonNull @Override public Matcher<View> getViewMatcher() {
                 return viewMatcher;
             }
         };

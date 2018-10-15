@@ -14,11 +14,11 @@ import static android.support.test.espresso.matcher.ViewMatchers.isDisplayed;
 @ParametersAreNonnullByDefault
 public class VisibilityAssertion extends BaseAssertionProvider {
 
-    VisibilityAssertion() {
+    public VisibilityAssertion() {
     }
 
     @Override
-    @NonNull Matcher<View> getViewMatcher() {
+    @NonNull public Matcher<View> getViewMatcher() {
         return isDisplayed();
     }
 
@@ -34,7 +34,7 @@ public class VisibilityAssertion extends BaseAssertionProvider {
 
         private final VisibilityAssertion visibilityAssertion;
 
-        Displayed(VisibilityAssertion visibilityAssertion) {
+        public Displayed(VisibilityAssertion visibilityAssertion) {
             this.visibilityAssertion = visibilityAssertion;
         }
 
@@ -52,15 +52,15 @@ public class VisibilityAssertion extends BaseAssertionProvider {
 
     public static class NotDisplayed extends BaseViewAssertion<NotDisplayed> {
 
-        private final VisibilityAssertion assertion;
+        private final VisibilityAssertion visibilityAssertion;
 
-        NotDisplayed(VisibilityAssertion assertion) {
-            this.assertion = assertion;
+        public NotDisplayed(VisibilityAssertion visibilityAssertion) {
+            this.visibilityAssertion = visibilityAssertion;
         }
 
         @Override
         @NonNull protected ViewAssertion getViewAssertion() {
-            return assertion.getViewAssertion(false);
+            return visibilityAssertion.getViewAssertion(false);
         }
 
         @Override

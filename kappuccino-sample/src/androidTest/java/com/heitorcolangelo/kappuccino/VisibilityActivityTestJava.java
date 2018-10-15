@@ -1,6 +1,8 @@
-package br.com.concretesolutions.kappuccino.test;
+package com.heitorcolangelo.kappuccino;
 
 import android.support.test.rule.ActivityTestRule;
+
+import com.heitorcolangelo.kappuccino.core.AllOfViewMatcher;
 
 import org.junit.Rule;
 import org.junit.Test;
@@ -20,7 +22,9 @@ public class VisibilityActivityTestJava {
     public void newTestMethod() {
 
         displayed()
-                .id(R.id.txt_visible);
+                .id(R.id.txt_visible)
+                .allOf(new AllOfViewMatcher()
+                        .id(R.id.txt_visible));
 
         notDisplayed()
                 .id(R.id.txt_invisible);

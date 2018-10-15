@@ -65,6 +65,12 @@ public abstract class BaseViewAssertion<T> implements ViewMatcherMethods<T> {
         return getInstance();
     }
 
+    @Override
+    public @NonNull T allOf(AllOfViewMatcher viewMatchers) {
+        check(viewMatcherMethod.allOf(viewMatchers));
+        return getInstance();
+    }
+
     protected abstract @NonNull ViewAssertion getViewAssertion();
 
     protected abstract @NonNull T getInstance();

@@ -1,1 +1,1 @@
-include ':sample', ':kappuccino', ':kappuccino-core'
+include ':kappuccino-sample', ':kappuccino', ':kappuccino-core', ':kappuccino-kotlin'

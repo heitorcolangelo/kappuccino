@@ -1,0 +1,35 @@
+apply plugin: 'com.android.library'
+apply plugin: 'kotlin-android'
+
+final versions = rootProject.ext
+
+android {
+    compileSdkVersion versions.compileSdk
+
+    defaultConfig {
+        minSdkVersion versions.minSdk
+        targetSdkVersion versions.targetSdk
+        versionCode versions.versionCode
+        versionName versions.versionName
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+    }
+    buildTypes {
+        debug {
+            testCoverageEnabled false
+        }
+
+        release {}
+    }
+    lintOptions {
+        abortOnError false
+    }
+
+    sourceSets { main { java.srcDirs += 'src/main/kotlin' } }
+}
+
+dependencies {
+    implementation project(':kappuccino-core')
+
+    implementation "org.jetbrains.kotlin:kotlin-stdlib:$versions.kotlin"
+    implementation "com.android.support.test.espresso:espresso-core:$versions.espresso"
+}
