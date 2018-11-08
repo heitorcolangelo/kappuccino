@@ -1,6 +1,7 @@
 package com.heitorcolangelo.kappuccino.core;
 
 import android.support.annotation.NonNull;
+import android.support.annotation.VisibleForTesting;
 import android.view.View;
 
 import org.hamcrest.Matcher;
@@ -10,69 +11,70 @@ import java.util.List;
 
 import javax.annotation.ParametersAreNonnullByDefault;
 
+@SuppressWarnings("WeakerAccess")
 @ParametersAreNonnullByDefault
-public final class AllOfViewMatcher implements ViewMatcherMethods<AllOfViewMatcher> {
+public class AllOfViewMatcher implements ViewMatcherMethod<AllOfViewMatcher> {
 
-    final ViewMatcherMethod viewMatcherMethod = new ViewMatcherMethod();
-    private final List<Matcher<View>> allOfMatchers = new ArrayList<>();
+    @VisibleForTesting final ViewMatcherMethods matcherMethods = new ViewMatcherMethods();
+
+    private List<Matcher<? super View>> viewMatchers = new ArrayList<>();
 
     @Override
     public @NonNull AllOfViewMatcher id(int viewId) {
-        allOfMatchers.add(viewMatcherMethod.id(viewId));
+        viewMatchers.add(matcherMethods.id(viewId));
         return this;
     }
 
     @Override
     public @NonNull AllOfViewMatcher text(int textId) {
-        allOfMatchers.add(viewMatcherMethod.text(textId));
+        viewMatchers.add(matcherMethods.text(textId));
         return this;
     }
 
     @Override
     public @NonNull AllOfViewMatcher text(String text) {
-        allOfMatchers.add(viewMatcherMethod.text(text));
+        viewMatchers.add(matcherMethods.text(text));
         return this;
     }
 
     @Override
     public @NonNull AllOfViewMatcher text(Matcher<String> textMatcher) {
-        allOfMatchers.add(viewMatcherMethod.text(textMatcher));
+        viewMatchers.add(matcherMethods.text(textMatcher));
         return this;
     }
 
     @Override
     public @NonNull AllOfViewMatcher contentDescription(int contentDescriptionId) {
-        allOfMatchers.add(viewMatcherMethod.contentDescription(contentDescriptionId));
+        viewMatchers.add(matcherMethods.contentDescription(contentDescriptionId));
         return this;
     }
 
     @Override
     public @NonNull AllOfViewMatcher contentDescription(String contentDescription) {
-        allOfMatchers.add(viewMatcherMethod.contentDescription(contentDescription));
+        viewMatchers.add(matcherMethods.contentDescription(contentDescription));
         return this;
     }
 
     @Override
     public @NonNull AllOfViewMatcher contentDescription(Matcher<CharSequence> contentDescriptionMatcher) {
-        allOfMatchers.add(viewMatcherMethod.contentDescription(contentDescriptionMatcher));
+        viewMatchers.add(matcherMethods.contentDescription(contentDescriptionMatcher));
         return this;
     }
 
     @Override
     public @NonNull AllOfViewMatcher custom(Matcher<View> viewMatcher) {
-        allOfMatchers.add(viewMatcherMethod.custom(viewMatcher));
+        viewMatchers.add(matcherMethods.custom(viewMatcher));
         return this;
     }
 
     @Override
-    public @NonNull AllOfViewMatcher allOf(AllOfViewMatcher viewMatchers) {
-        allOfMatchers.add(viewMatcherMethod.allOf(viewMatchers));
+    public @NonNull AllOfViewMatcher allOf(AllOfViewMatcher allOfMatcher) {
+        viewMatchers.add(matcherMethods.allOf(allOfMatcher));
         return this;
     }
 
-    @NonNull Matcher<View>[] getViewMatchers() {
-        //noinspection unchecked
-        return (Matcher<View>[]) allOfMatchers.toArray();
+    @NonNull List<Matcher<? super View>> getMatchers() {
+        return viewMatchers;
     }
 
 }

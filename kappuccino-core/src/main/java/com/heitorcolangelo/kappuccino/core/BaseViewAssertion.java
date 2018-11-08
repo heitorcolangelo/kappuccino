@@ -13,49 +13,49 @@ import static android.support.test.espresso.Espresso.onView;
 
 @SuppressWarnings("WeakerAccess")
 @ParametersAreNonnullByDefault
-public abstract class BaseViewAssertion<T> implements ViewMatcherMethods<T> {
+public abstract class BaseViewAssertion<T> implements ViewMatcherMethod<T> {
 
-    ViewMatcherMethod viewMatcherMethod = new ViewMatcherMethod();
+    private final ViewMatcherMethods viewMatcherMethods = viewMatcherMethodsInstance();
 
     @Override
     public @NonNull T id(int viewId) {
-        check(viewMatcherMethod.id(viewId));
+        check(viewMatcherMethods.id(viewId));
         return getInstance();
     }
 
     @Override
     public @NonNull T text(int textId) {
-        check(viewMatcherMethod.text(textId));
+        check(viewMatcherMethods.text(textId));
         return getInstance();
     }
 
     @Override
     public @NonNull T text(String text) {
-        check(viewMatcherMethod.text(text));
+        check(viewMatcherMethods.text(text));
         return getInstance();
     }
 
     @Override
     public @NonNull T text(Matcher<String> textMatcher) {
-        check(viewMatcherMethod.text(textMatcher));
+        check(viewMatcherMethods.text(textMatcher));
         return getInstance();
     }
 
     @Override
     public @NonNull T contentDescription(int contentDescriptionId) {
-        check(viewMatcherMethod.contentDescription(contentDescriptionId));
+        check(viewMatcherMethods.contentDescription(contentDescriptionId));
         return getInstance();
     }
 
     @Override
     public @NonNull T contentDescription(String contentDescription) {
-        check(viewMatcherMethod.contentDescription(contentDescription));
+        check(viewMatcherMethods.contentDescription(contentDescription));
         return getInstance();
     }
 
     @Override
     public @NonNull T contentDescription(Matcher<CharSequence> contentDescriptionMatcher) {
-        check(viewMatcherMethod.contentDescription(contentDescriptionMatcher));
+        check(viewMatcherMethods.contentDescription(contentDescriptionMatcher));
         return getInstance();
     }
 
@@ -66,14 +66,16 @@ public abstract class BaseViewAssertion<T> implements ViewMatcherMethods<T> {
     }
 
     @Override
-    public @NonNull T allOf(AllOfViewMatcher viewMatchers) {
-        check(viewMatcherMethod.allOf(viewMatchers));
+    public @NonNull T allOf(AllOfViewMatcher allOfMatcher) {
+        check(viewMatcherMethods.allOf(allOfMatcher));
         return getInstance();
     }
 
     protected abstract @NonNull ViewAssertion getViewAssertion();
 
     protected abstract @NonNull T getInstance();
+
+    protected abstract @NonNull ViewMatcherMethods viewMatcherMethodsInstance();
 
     @VisibleForTesting
     protected void check(Matcher<View> viewMatcher) {

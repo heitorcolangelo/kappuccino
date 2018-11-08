@@ -17,24 +17,24 @@ import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.mock;
 
 @SuppressWarnings("unchecked")
-public class ViewMatcherMethodTest {
+public class ViewMatcherMethodsTest {
 
     @IdRes private static final int ID = 123;
     @StringRes private static final int STRING_RES = 321;
     private static final String TEXT = "TEXT";
 
-    private ViewMatcherMethod viewMatcherMethod;
+    private ViewMatcherMethods viewMatcherMethods;
 
     @Before
     public void setUp() {
-        viewMatcherMethod = new ViewMatcherMethod();
+        viewMatcherMethods = new ViewMatcherMethods();
     }
 
     @Test
     public void id() {
         Matcher<View> withIdMatcher = withId(ID);
 
-        Matcher<View> id = viewMatcherMethod.id(ID);
+        Matcher<View> id = viewMatcherMethods.id(ID);
 
         assertEquals(withIdMatcher.toString(), id.toString());
     }
@@ -43,7 +43,7 @@ public class ViewMatcherMethodTest {
     public void text_stringRes() {
         Matcher<View> withTextMatcher = withText(STRING_RES);
 
-        Matcher<View> text = viewMatcherMethod.text(STRING_RES);
+        Matcher<View> text = viewMatcherMethods.text(STRING_RES);
 
         assertEquals(withTextMatcher.toString(), text.toString());
 
@@ -53,7 +53,7 @@ public class ViewMatcherMethodTest {
     public void text_string() {
         Matcher<View> withTextMatcher = withText(TEXT);
 
-        Matcher<View> text = viewMatcherMethod.text(TEXT);
+        Matcher<View> text = viewMatcherMethods.text(TEXT);
 
         assertEquals(withTextMatcher.toString(), text.toString());
     }
@@ -62,7 +62,7 @@ public class ViewMatcherMethodTest {
     public void text_stringMatcher() {
         Matcher<View> textMatcherMock = withText(stubStringMatcher());
 
-        Matcher<View> text = viewMatcherMethod.text(stubStringMatcher());
+        Matcher<View> text = viewMatcherMethods.text(stubStringMatcher());
 
         assertEquals(textMatcherMock.toString(), text.toString());
     }
@@ -71,7 +71,7 @@ public class ViewMatcherMethodTest {
     public void contentDescription_stringRes() {
         Matcher<View> withContentDescriptionMatcher = withContentDescription(STRING_RES);
 
-        Matcher<View> contentDescription = viewMatcherMethod.contentDescription(STRING_RES);
+        Matcher<View> contentDescription = viewMatcherMethods.contentDescription(STRING_RES);
 
         assertEquals(withContentDescriptionMatcher.toString(), contentDescription.toString());
     }
@@ -80,7 +80,7 @@ public class ViewMatcherMethodTest {
     public void contentDescription_string() {
         Matcher<View> withContentDescriptionMatcher = withContentDescription(TEXT);
 
-        Matcher<View> contentDescription = viewMatcherMethod.contentDescription(TEXT);
+        Matcher<View> contentDescription = viewMatcherMethods.contentDescription(TEXT);
 
         assertEquals(withContentDescriptionMatcher.toString(), contentDescription.toString());
     }
@@ -89,7 +89,7 @@ public class ViewMatcherMethodTest {
     public void contentDescription_charSequenceMather() {
         Matcher<View> withContentDescriptionMatcher = withContentDescription(stubCharSequenceMatcher());
 
-        Matcher<View> contentDescription = viewMatcherMethod.contentDescription(stubCharSequenceMatcher());
+        Matcher<View> contentDescription = viewMatcherMethods.contentDescription(stubCharSequenceMatcher());
 
         assertEquals(withContentDescriptionMatcher.toString(), contentDescription.toString());
     }
@@ -98,7 +98,7 @@ public class ViewMatcherMethodTest {
     public void custom() {
         Matcher<View> customMatcherMock = (Matcher<View>) mock(Matcher.class);
 
-        Matcher<View> custom = viewMatcherMethod.custom(customMatcherMock);
+        Matcher<View> custom = viewMatcherMethods.custom(customMatcherMock);
 
         assertEquals(customMatcherMock.toString(), custom.toString());
 

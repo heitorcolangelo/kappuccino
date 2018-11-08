@@ -23,51 +23,63 @@ public class VisibilityAssertion extends BaseAssertionProvider {
     }
 
     public static Displayed displayed() {
-        return new Displayed(new VisibilityAssertion());
+        return new Displayed(new VisibilityAssertion(), new ViewMatcherMethods());
     }
 
     public static NotDisplayed notDisplayed() {
-        return new NotDisplayed(new VisibilityAssertion());
+        return new NotDisplayed(new VisibilityAssertion(), new ViewMatcherMethods());
     }
 
     public static class Displayed extends BaseViewAssertion<Displayed> {
 
         private final VisibilityAssertion visibilityAssertion;
+        private final ViewMatcherMethods viewMatcherMethods;
 
-        public Displayed(VisibilityAssertion visibilityAssertion) {
+        public Displayed(VisibilityAssertion visibilityAssertion, ViewMatcherMethods viewMatcherMethods) {
             this.visibilityAssertion = visibilityAssertion;
+            this.viewMatcherMethods = viewMatcherMethods;
         }
 
         @Override
-        @NonNull protected ViewAssertion getViewAssertion() {
+        protected @NonNull ViewAssertion getViewAssertion() {
             return visibilityAssertion.getViewAssertion(true);
         }
 
         @Override
-        @NonNull protected Displayed getInstance() {
+        protected @NonNull Displayed getInstance() {
             return this;
         }
 
+        @Override
+        protected @NonNull ViewMatcherMethods viewMatcherMethodsInstance() {
+            return viewMatcherMethods;
+        }
     }
 
     public static class NotDisplayed extends BaseViewAssertion<NotDisplayed> {
 
         private final VisibilityAssertion visibilityAssertion;
+        private final ViewMatcherMethods viewMatcherMethods;
 
-        public NotDisplayed(VisibilityAssertion visibilityAssertion) {
+        public NotDisplayed(VisibilityAssertion visibilityAssertion, ViewMatcherMethods viewMatcherMethods) {
             this.visibilityAssertion = visibilityAssertion;
+            this.viewMatcherMethods = viewMatcherMethods;
         }
 
         @Override
-        @NonNull protected ViewAssertion getViewAssertion() {
+        protected @NonNull ViewAssertion getViewAssertion() {
             return visibilityAssertion.getViewAssertion(false);
         }
 
         @Override
-        @NonNull protected NotDisplayed getInstance() {
+        protected @NonNull NotDisplayed getInstance() {
             return this;
         }
 
+        @Override
+        protected @NonNull ViewMatcherMethods viewMatcherMethodsInstance() {
+            return viewMatcherMethods;
+        }
     }
 
 }

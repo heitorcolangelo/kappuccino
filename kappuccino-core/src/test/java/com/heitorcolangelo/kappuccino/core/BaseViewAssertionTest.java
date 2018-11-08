@@ -29,14 +29,14 @@ public class BaseViewAssertionTest {
     @StringRes private static final int STRING_RES = 321;
     private static final String TEXT = "TEXT";
 
-    private ViewMatcherMethod viewMatcherMethodMock;
+    private ViewMatcherMethods viewMatcherMethodMock;
     private BaseViewAssertion baseViewAssertion;
 
     @Before
     public void setUp() {
         final Matcher matcher = withId(ID);
 
-        viewMatcherMethodMock = mock(ViewMatcherMethod.class, new Answer() {
+        viewMatcherMethodMock = mock(ViewMatcherMethods.class, new Answer() {
             @Override public Object answer(InvocationOnMock invocation) throws Throwable {
                 if (Matcher.class.equals(invocation.getMethod().getReturnType())) {
                     return matcher;
@@ -47,8 +47,6 @@ public class BaseViewAssertionTest {
         });
 
         baseViewAssertion = new TestViewAssertion();
-
-        baseViewAssertion.viewMatcherMethod = this.viewMatcherMethodMock;
     }
 
     @Test
@@ -107,15 +105,23 @@ public class BaseViewAssertionTest {
 
     @ParametersAreNonnullByDefault
     private class TestViewAssertion extends BaseViewAssertion<TestViewAssertion> {
-        @NonNull @Override protected ViewAssertion getViewAssertion() {
+        @Override
+        protected @NonNull ViewAssertion getViewAssertion() {
             return matches(isDisplayed());
         }
 
-        @NonNull @Override protected TestViewAssertion getInstance() {
+        @Override
+        protected @NonNull TestViewAssertion getInstance() {
             return this;
         }
 
-        @Override protected void check(Matcher<View> viewMatcher) {
+        @Override
+        protected void check(Matcher<View> viewMatcher) {
+        }
+
+        @Override
+        protected @NonNull ViewMatcherMethods viewMatcherMethodsInstance() {
+            return viewMatcherMethodMock;
         }
     }
 

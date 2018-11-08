@@ -11,8 +11,9 @@ import br.com.concretesolutions.kappuccino.custom.intent.IntentMatcherInteractio
 import br.com.concretesolutions.kappuccino.sample.MainActivity
 import br.com.concretesolutions.kappuccino.sample.R
 import br.com.concretesolutions.kappuccino.sample.VisibilityAssertionsActivity
-import com.heitorcolangelo.kappuccino.kotlin.VisibilityAssertionKt.displayed2
-import com.heitorcolangelo.kappuccino.kotlin.VisibilityAssertionKt.notDisplayed2
+import com.heitorcolangelo.kappuccino.core.AllOfViewMatcher
+import com.heitorcolangelo.kappuccino.kotlin.displayed2
+import com.heitorcolangelo.kappuccino.kotlin.notDisplayed2
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -133,9 +134,12 @@ class VisibilityActivityTest {
 
     @Test
     fun newVisibilityTest() {
-
         displayed2 {
             id(R.id.txt_visible)
+            allOf(AllOfViewMatcher()
+                    .id(R.id.txt_visible)
+                    .text(R.string.visibility_invisible_with_id))
+            text(R.string.visibility_invisible_with_id)
         }
 
         notDisplayed2 {

@@ -3,82 +3,64 @@ package com.heitorcolangelo.kappuccino.core;
 import android.support.annotation.IdRes;
 import android.support.annotation.NonNull;
 import android.support.annotation.StringRes;
-import android.support.test.espresso.matcher.ViewMatchers;
 import android.view.View;
 
 import org.hamcrest.Matcher;
+import org.hamcrest.Matchers;
 
 import javax.annotation.ParametersAreNonnullByDefault;
 
+import static android.support.test.espresso.matcher.ViewMatchers.withContentDescription;
+import static android.support.test.espresso.matcher.ViewMatchers.withId;
+import static android.support.test.espresso.matcher.ViewMatchers.withText;
+
 @ParametersAreNonnullByDefault
-public interface ViewMatcherMethods<T> {
+public class ViewMatcherMethods implements ViewMatcherMethod<Matcher<View>> {
 
-    /**
-     * Match view based on view Id.
-     * <p>
-     * It will call {@link ViewMatchers#withId(int)}
-     */
-    @NonNull
-    T id(@IdRes int viewId);
+    @Override
+    public @NonNull Matcher<View> id(@IdRes int viewId) {
+        return withId(viewId);
+    }
 
-    /**
-     * Match a view based on {@link StringRes} text.
-     * <p>
-     * It will call {@link ViewMatchers#withText(int)}
-     */
-    @NonNull
-    T text(@StringRes int textId);
+    @Override
+    public @NonNull Matcher<View> text(@StringRes int textId) {
+        return withText(textId);
+    }
 
-    /**
-     * Match a view based on custom {@link String}text.
-     * <p>
-     * It will call {@link ViewMatchers#withText(String)}
-     */
-    @NonNull
-    T text(String text);
+    @Override
+    public @NonNull Matcher<View> text(String text) {
+        return withText(text);
+    }
 
-    /**
-     * Match a view based on {@link Matcher<String>} content description.
-     * <p>
-     * It will call {@link ViewMatchers#withText(Matcher)}
-     */
-    @NonNull
-    T text(Matcher<String> textMatcher);
+    @Override
+    public @NonNull Matcher<View> text(Matcher<String> textMatcher) {
+        return withText(textMatcher);
+    }
 
-    /**
-     * Match a view based on {@link StringRes} content description.
-     * <p>
-     * It will call {@link ViewMatchers#withContentDescription(int)}
-     */
-    @NonNull
-    T contentDescription(@StringRes int contentDescriptionId);
+    @Override
+    public @NonNull Matcher<View> contentDescription(@StringRes int contentDescriptionId) {
+        return withContentDescription(contentDescriptionId);
+    }
 
-    /**
-     * Match a view based on {@link String} content description.
-     * <p>
-     * It will call {@link ViewMatchers#withContentDescription(String)}
-     */
-    @NonNull
-    T contentDescription(String contentDescription);
+    @Override
+    public @NonNull Matcher<View> contentDescription(String contentDescription) {
+        return withContentDescription(contentDescription);
+    }
 
-    /**
-     * Match a view based on {@link Matcher<CharSequence>} content description.
-     * <p>
-     * It will call {@link ViewMatchers#withContentDescription(Matcher)}
-     */
-    @NonNull
-    T contentDescription(Matcher<CharSequence> contentDescriptionMatcher);
+    @Override
+    public @NonNull Matcher<View> contentDescription(Matcher<CharSequence> contentDescriptionMatcher) {
+        return withContentDescription(contentDescriptionMatcher);
+    }
 
-    /**
-     * Match a view based on the custom matcher passed as parameter
-     */
-    @NonNull
-    T custom(Matcher<View> viewMatcher);
+    @Override
+    public @NonNull Matcher<View> custom(Matcher<View> viewMatcher) {
+        return viewMatcher;
+    }
 
-    /**
-     * Match a view based on the combination of all matchers passed as parameter
-     */
-    @NonNull
-    T allOf(AllOfViewMatcher viewMatchers);
+    @Override
+    public @NonNull Matcher<View> allOf(AllOfViewMatcher allOfMatcher) {
+        Iterable<Matcher<? super View>> allOfMatchersIterable = allOfMatcher.getMatchers();
+        return Matchers.allOf(allOfMatchersIterable);
+    }
 
 }

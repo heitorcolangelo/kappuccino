@@ -24,7 +24,9 @@ public class VisibilityActivityTestJava {
         displayed()
                 .id(R.id.txt_visible)
                 .allOf(new AllOfViewMatcher()
-                        .id(R.id.txt_visible));
+                        .id(R.id.txt_visible)
+                        .text(R.string.visibility_invisible_with_id))
+                .text(R.string.visibility_invisible_with_id);
 
         notDisplayed()
                 .id(R.id.txt_invisible);

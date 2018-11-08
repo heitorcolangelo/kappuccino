@@ -1,16 +1,16 @@
 package com.heitorcolangelo.kappuccino.kotlin
 
+import com.heitorcolangelo.kappuccino.core.ViewMatcherMethods
 import com.heitorcolangelo.kappuccino.core.VisibilityAssertion
 
-object VisibilityAssertionKt : VisibilityAssertion() {
+private val visibilityAssertion = VisibilityAssertion()
+private val viewMatcherMethods = ViewMatcherMethods()
 
-    fun displayed2(matcher: VisibilityAssertion.Displayed.() -> VisibilityAssertion.Displayed) {
-        VisibilityAssertion.Displayed(this).apply { matcher() }
-    }
+fun displayed2(matcher: VisibilityAssertion.Displayed.() -> Unit) {
+    VisibilityAssertion.Displayed(visibilityAssertion, viewMatcherMethods).apply { matcher() }
+}
 
-    fun notDisplayed2(matcher: VisibilityAssertion.NotDisplayed.() -> VisibilityAssertion.NotDisplayed) {
-        VisibilityAssertion.NotDisplayed(this).apply { matcher() }
-    }
-
+fun notDisplayed2(matcher: VisibilityAssertion.NotDisplayed.() -> Unit) {
+    VisibilityAssertion.NotDisplayed(visibilityAssertion, viewMatcherMethods).apply { matcher() }
 }
 

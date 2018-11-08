@@ -26,7 +26,8 @@ public class VisibilityAssertionTest {
     @Test
     public void displayed_shouldCall_visibilityAssertionGetViewAssertion_TRUE() {
         VisibilityAssertion visibilityAssertion = mock(VisibilityAssertion.class);
-        VisibilityAssertion.Displayed displayed = new VisibilityAssertion.Displayed(visibilityAssertion);
+        ViewMatcherMethods viewMatcherMethods = mock(ViewMatcherMethods.class);
+        VisibilityAssertion.Displayed displayed = new VisibilityAssertion.Displayed(visibilityAssertion, viewMatcherMethods);
 
         displayed.getViewAssertion();
 
@@ -36,7 +37,8 @@ public class VisibilityAssertionTest {
     @Test
     public void notDisplayed_shouldCall_visibilityAssertionGetViewAssertion_FALSE() {
         VisibilityAssertion visibilityAssertion = mock(VisibilityAssertion.class);
-        VisibilityAssertion.NotDisplayed notDisplayed = new VisibilityAssertion.NotDisplayed(visibilityAssertion);
+        ViewMatcherMethods viewMatcherMethods = mock(ViewMatcherMethods.class);
+        VisibilityAssertion.NotDisplayed notDisplayed = new VisibilityAssertion.NotDisplayed(visibilityAssertion, viewMatcherMethods);
 
         notDisplayed.getViewAssertion();
 
