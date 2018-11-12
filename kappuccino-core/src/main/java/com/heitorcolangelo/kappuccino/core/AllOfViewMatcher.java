@@ -1,7 +1,7 @@
 package com.heitorcolangelo.kappuccino.core;
 
 import android.support.annotation.NonNull;
-import android.support.annotation.VisibleForTesting;
+import android.support.annotation.RestrictTo;
 import android.view.View;
 
 import org.hamcrest.Matcher;
@@ -15,9 +15,19 @@ import javax.annotation.ParametersAreNonnullByDefault;
 @ParametersAreNonnullByDefault
 public class AllOfViewMatcher implements ViewMatcherMethod<AllOfViewMatcher> {
 
-    @VisibleForTesting final ViewMatcherMethods matcherMethods = new ViewMatcherMethods();
+    private final ViewMatcherMethods matcherMethods;
+    private final List<Matcher<? super View>> viewMatchers;
 
-    private List<Matcher<? super View>> viewMatchers = new ArrayList<>();
+    @RestrictTo(RestrictTo.Scope.TESTS)
+    AllOfViewMatcher(ViewMatcherMethods matcherMethods, List<Matcher<? super View>> viewMatchers) {
+        this.matcherMethods = matcherMethods;
+        this.viewMatchers = viewMatchers;
+    }
+
+    public AllOfViewMatcher() {
+        this.matcherMethods = new ViewMatcherMethods();
+        this.viewMatchers = new ArrayList<>();
+    }
 
     @Override
     public @NonNull AllOfViewMatcher id(int viewId) {
