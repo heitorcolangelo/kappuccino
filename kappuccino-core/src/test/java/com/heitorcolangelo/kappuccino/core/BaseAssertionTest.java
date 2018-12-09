@@ -12,14 +12,14 @@ import static android.support.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static org.hamcrest.CoreMatchers.not;
 import static org.junit.Assert.assertEquals;
 
-public class BaseAssertionProviderTest {
+public class BaseAssertionTest {
 
     @Test
     public void getViewAssertion() {
 
         final Matcher<View> viewMatcher = isDisplayed();
 
-        BaseAssertionProvider assertionProvider = new BaseAssertionProvider() {
+        BaseAssertion assertionProvider = new BaseAssertion() {
             @NonNull @Override public Matcher<View> getViewMatcher() {
                 return viewMatcher;
             }

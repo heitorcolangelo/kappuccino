@@ -5,15 +5,18 @@ import android.support.annotation.RestrictTo;
 import android.view.View;
 
 import org.hamcrest.Matcher;
+import org.hamcrest.Matchers;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.ParametersAreNonnullByDefault;
 
-@SuppressWarnings("WeakerAccess")
+/**
+ * Implementation of {@link BaseMatcherMethods} to handle {@link Matchers#allOf(Iterable)} usage.
+ */
 @ParametersAreNonnullByDefault
-public class AllOfViewMatcher implements ViewMatcherMethod<AllOfViewMatcher> {
+public class AllOfViewMatcher implements BaseMatcherMethods<AllOfViewMatcher> {
 
     private final ViewMatcherMethods matcherMethods;
     private final List<Matcher<? super View>> viewMatchers;

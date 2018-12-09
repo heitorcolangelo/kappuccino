@@ -15,7 +15,7 @@ import static android.support.test.espresso.matcher.ViewMatchers.withId;
 import static android.support.test.espresso.matcher.ViewMatchers.withText;
 
 @ParametersAreNonnullByDefault
-public class ViewMatcherMethods implements ViewMatcherMethod<Matcher<View>> {
+public class ViewMatcherMethods implements BaseMatcherMethods<Matcher<View>> {
 
     @Override
     public @NonNull Matcher<View> id(@IdRes int viewId) {

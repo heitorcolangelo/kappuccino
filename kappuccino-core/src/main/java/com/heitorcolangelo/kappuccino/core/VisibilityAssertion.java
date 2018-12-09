@@ -12,13 +12,13 @@ import static android.support.test.espresso.matcher.ViewMatchers.isDisplayed;
 
 @SuppressWarnings("WeakerAccess")
 @ParametersAreNonnullByDefault
-public class VisibilityAssertion extends BaseAssertionProvider {
+public class VisibilityAssertion extends BaseAssertion {
 
     public VisibilityAssertion() {
     }
 
     @Override
-    @NonNull public Matcher<View> getViewMatcher() {
+    public @NonNull Matcher<View> getViewMatcher() {
         return isDisplayed();
     }
 

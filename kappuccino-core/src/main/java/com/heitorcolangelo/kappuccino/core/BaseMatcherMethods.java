@@ -11,7 +11,7 @@ import org.hamcrest.Matcher;
 import javax.annotation.ParametersAreNonnullByDefault;
 
 @ParametersAreNonnullByDefault
-public interface ViewMatcherMethod<T> {
+public interface BaseMatcherMethods<T> {
 
     /**
      * Match view based on view Id.

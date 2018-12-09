@@ -4,8 +4,6 @@ import android.support.annotation.IdRes;
 import android.support.annotation.StringRes;
 import android.view.View;
 
-import org.hamcrest.BaseMatcher;
-import org.hamcrest.Description;
 import org.hamcrest.Matcher;
 import org.junit.Before;
 import org.junit.Test;
@@ -13,10 +11,11 @@ import org.junit.Test;
 import static android.support.test.espresso.matcher.ViewMatchers.withContentDescription;
 import static android.support.test.espresso.matcher.ViewMatchers.withId;
 import static android.support.test.espresso.matcher.ViewMatchers.withText;
+import static com.heitorcolangelo.kappuccino.core.utils.StubbedObjects.charSequenceMatcher;
+import static com.heitorcolangelo.kappuccino.core.utils.StubbedObjects.stringMatcher;
 import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.mock;
 
-@SuppressWarnings("unchecked")
 public class ViewMatcherMethodsTest {
 
     @IdRes private static final int ID = 123;
@@ -60,9 +59,9 @@ public class ViewMatcherMethodsTest {
 
     @Test
     public void text_stringMatcher() {
-        Matcher<View> textMatcherMock = withText(stubStringMatcher());
+        Matcher<View> textMatcherMock = withText(stringMatcher());
 
-        Matcher<View> text = viewMatcherMethods.text(stubStringMatcher());
+        Matcher<View> text = viewMatcherMethods.text(stringMatcher());
 
         assertEquals(textMatcherMock.toString(), text.toString());
     }
@@ -87,49 +86,22 @@ public class ViewMatcherMethodsTest {
 
     @Test
     public void contentDescription_charSequenceMather() {
-        Matcher<View> withContentDescriptionMatcher = withContentDescription(stubCharSequenceMatcher());
+        Matcher<View> withContentDescriptionMatcher = withContentDescription(charSequenceMatcher());
 
-        Matcher<View> contentDescription = viewMatcherMethods.contentDescription(stubCharSequenceMatcher());
+        Matcher<View> contentDescription = viewMatcherMethods.contentDescription(charSequenceMatcher());
 
         assertEquals(withContentDescriptionMatcher.toString(), contentDescription.toString());
     }
 
     @Test
     public void custom() {
+        //noinspection unchecked
         Matcher<View> customMatcherMock = (Matcher<View>) mock(Matcher.class);
 
         Matcher<View> custom = viewMatcherMethods.custom(customMatcherMock);
 
         assertEquals(customMatcherMock.toString(), custom.toString());
 
-    }
-
-    private BaseMatcher<String> stubStringMatcher() {
-        return new BaseMatcher<String>() {
-            @Override public boolean matches(Object item) {
-                return false;
-            }
-
-            @Override public void describeMismatch(Object item, Description mismatchDescription) {
-
-            }
-
-            @Override public void describeTo(Description description) {
-
-            }
-        };
-    }
-
-    private BaseMatcher<CharSequence> stubCharSequenceMatcher() {
-        return new BaseMatcher<CharSequence>() {
-            @Override public boolean matches(Object item) {
-                return false;
-            }
-
-            @Override public void describeTo(Description description) {
-
-            }
-        };
     }
 
 }

@@ -13,7 +13,7 @@ import static android.support.test.espresso.Espresso.onView;
 
 @SuppressWarnings("WeakerAccess")
 @ParametersAreNonnullByDefault
-public abstract class BaseViewAssertion<T> implements ViewMatcherMethod<T> {
+public abstract class BaseViewAssertion<T> implements BaseMatcherMethods<T> {
 
     private final ViewMatcherMethods viewMatcherMethods = viewMatcherMethodsInstance();
 
